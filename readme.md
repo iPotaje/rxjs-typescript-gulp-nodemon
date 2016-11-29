@@ -1,4 +1,4 @@
-# Simple Node, Nodemon & Typescript workflow
+# Simple RxJS, Node, Nodemon & Typescript workflow
 Simple workflow to introduce myself with rxjs.
 
 ### Problems
@@ -13,3 +13,6 @@ Needed to put the ext of typescript to watch
 
 @types/es6-shim
 
+##Uses
+- Example of use of RxJS
+- Boilerplate of Typescript with Nodemon
