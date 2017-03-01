@@ -1,13 +1,12 @@
 import { Observable, Observer, Subscription, Subject } from 'rxjs';
 
-console.log("*********************** Begin ***********************");
 console.log("******************************************");
 console.log("Simple example");
 console.log("******************************************");
 
-Observable
-  .of(1, 2, 3)
-  .subscribe(x => console.log(x));
+let simple_observable = Observable.of(1, 2, 3);
+simple_observable.subscribe(x => console.log("1: " + x));
+simple_observable.subscribe(x => console.log("2: " + x));
 
 console.log("******************************************");
 console.log("Subscription example")
@@ -15,19 +14,16 @@ console.log("******************************************");
 
 let observable = new Observable<string>( 
   (observer: Observer<string>) => {
-  
-  // Emit a single value after 1 second
-  let timer = setTimeout(() => {
     observer.next("hello");
     observer.complete();
-  }, 1000);
-
-  // On unsubscription, cancel the timer
-  return () => clearTimeout(timer);
 });
 
-let subscription = observable.subscribe(
-  x => { console.log(x); }
+let subscription1 = observable.subscribe(
+  x => { console.log("1: " + x); }
+);
+
+let subscription2 = observable.subscribe(
+  x => { console.log("2: " + x); }
 );
 
 console.log("******************************************");
@@ -35,12 +31,9 @@ console.log("Complex example")
 console.log("******************************************");
 
 class Anunciante extends Observable<string>{
-
   constructor() {
     super((observer:any) => {
-      let timer = setTimeout(() => {
-        observer.next(" hoooola");
-      }, 1000);
+      observer.next(" hoooola");
     });
   }
 }
@@ -61,14 +54,9 @@ class Expectador implements Observer<string>{
     console.log(`Soy ${this.name} con: ${v}`)
   }
 
-  error(e:any){
+  error(e:any){}
 
-  }
-
-  complete() {
-
-  }
-
+  complete() {}
 } 
 
 let anunciante  = new Anunciante();
@@ -120,4 +108,4 @@ let component2 = new Component2(service);
 service.channel.next("Comer hoy?");
 service.channel.complete();
 
-console.log("************************ End ************************");
+console.log("************* End ************************");
